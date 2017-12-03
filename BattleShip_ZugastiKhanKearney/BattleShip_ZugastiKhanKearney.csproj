@@ -113,7 +113,7 @@
     <Resource Include="images\b4.png" />
     <Resource Include="images\b5.png" />
     <Resource Include="images\battleship_banner.png" />
-    <Resource Include="images\watttaaa.gif" />
+    <Resource Include="images\water.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
