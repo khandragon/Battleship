@@ -29,7 +29,7 @@
         <Button x:Name="FireBtn" Margin="10,10,10,10"  Grid.Column="4" Grid.Row="3" Content="Fire" Click="FireBtn_Click"/>
 
         <Canvas x:Name="LayoutRoot" Grid.ColumnSpan="3" Grid.RowSpan="4" Panel.ZIndex="5">
-            <Grid x:Name="ShipSize30alpha" Canvas.Left="37" Canvas.Top="174" Height="151" Width="50" Panel.ZIndex="6">
+            <Grid x:Name="ShipSize30" Canvas.Left="37" Canvas.Top="174" Height="151" Width="50" Panel.ZIndex="6">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10*"/>
                     <RowDefinition Height="10*"/>
@@ -40,7 +40,7 @@
                 <Rectangle Grid.Row="2" Grid.Column="0" Margin="0,0,0,0" Fill="#B2000000"/>
             </Grid>
 
-            <Grid x:Name="ShipSize31alpha" Canvas.Left="107" Canvas.Top="174" Height="151" Width="50" Panel.ZIndex="6">
+            <Grid x:Name="ShipSize31" Canvas.Left="107" Canvas.Top="174" Height="151" Width="50" Panel.ZIndex="6">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50*"/>
                     <RowDefinition Height="50"/>

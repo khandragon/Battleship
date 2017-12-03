@@ -37,7 +37,7 @@ namespace BattleShip_ZugastiKhanKearney
             p = new HumanPlayer(rb);
             dp = new NotSmartPlayer(pb);
 
-            Grid[] tempShips = { ShipSize30alpha, ShipSize31alpha, ShipSize2, ShipSize4, ShipSize5 };
+            Grid[] tempShips = { ShipSize30, ShipSize31, ShipSize2, ShipSize4, ShipSize5 };
             for(int i = 0; i < tempShips.Length; i++)
             {
                 originalShipPositionX[i] = Canvas.GetLeft(tempShips[i]);

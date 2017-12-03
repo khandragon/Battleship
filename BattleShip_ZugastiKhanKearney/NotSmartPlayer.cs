@@ -12,10 +12,13 @@ namespace BattleShip_ZugastiKhanKearney
 {
     class NotSmartPlayer : Player
     {
+        
+
         public NotSmartPlayer(PlayingBoard pb) : base(pb)
         {
             
         }
+
         public override Point Play()
         {
             Point p = new Point(-1,-1);
