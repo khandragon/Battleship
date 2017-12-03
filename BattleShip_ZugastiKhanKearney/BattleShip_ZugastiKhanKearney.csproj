@@ -54,9 +54,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ComputerShip.cs" />
     <Compile Include="IDragable.cs" />
     <Compile Include="Ship.cs" />
-    <Compile Include="Shot.cs" />
+    <Compile Include="Location.cs" />
     <Compile Include="NotSmartPlayer.cs" />
     <Compile Include="HumanPlayer.cs" />
     <Compile Include="Player.cs" />

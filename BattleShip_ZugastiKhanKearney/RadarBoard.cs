@@ -9,8 +9,10 @@ using System.Windows.Media;
 
 namespace BattleShip_ZugastiKhanKearney
 {
-    class RadarBoard : Board
+    public class RadarBoard : Board
     {
+        public Point FireLocation { get; set; }
+
         public RadarBoard(BattleShipUI bsu) : base(bsu)
         {
 
@@ -18,13 +20,65 @@ namespace BattleShip_ZugastiKhanKearney
 
         public override void ClickLocation (object sender, EventArgs r)
         {
-
+            Bsu.P.selectFireLocation(GetLocationOfClick());
         }
 
-        public override bool IsAHit(Point p)
+        public void Reset()
         {
-            return false;
+            IsOccupied = new int[10][];
+            AllLocations = new Location[10][];
+            for (int i = 0; i < IsOccupied.Length; i++)
+            {
+                AllLocations[i] = new Location[10];
+                for (int j = 0; j < AllLocations[i].Length; j++)
+                {
+                    AllLocations[i][j] = Location.WillMiss;
+                }
+                IsOccupied[i] = new int[10];
+            }
+            while(G.Children.Count > 0)
+            {
+                G.Children.RemoveAt(0);
+            }
+            
         }
+
+        public bool IsPositionValid(Ship s, Point p)
+        {
+            if (p.X > 10 - s.Size && !s.IsHorizontal)
+            {
+                return false;
+            }
+
+            if (p.Y > 10 - s.Size && s.IsHorizontal)
+            {
+                return false;
+            }
+
+            if (s.IsHorizontal)
+            {
+                for (int i = 0; i < s.Size; i++)
+                {
+                    if (IsOccupied[(int)p.X][(int)p.Y + i] > 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < s.Size; i++)
+                {
+                    if (IsOccupied[(int)p.X + i][(int)p.Y] > 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        
         public override void Load()
         {
             Border b = new Border();

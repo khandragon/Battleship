@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BattleShip_ZugastiKhanKearney
 {
-    public enum Shot
+    public enum Location
     {
-        Hit, Miss, NotAttempted
+        WillHit, WillMiss
     };
 }

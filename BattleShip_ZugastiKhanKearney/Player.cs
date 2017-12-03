@@ -7,14 +7,18 @@ using System.Windows;
 
 namespace BattleShip_ZugastiKhanKearney
 {
-    abstract class Player
+    public abstract class Player
     {
         public Board B { get; set; }
-        public Random RD { get; set; } = new Random();
+        public bool[][] TriedToHit { get; set; } = new bool[10][];
 
         public Player(Board B)
         {
             this.B = B;
+            for (int i = 0; i < 10; i++)
+            {
+                TriedToHit[i] = new bool[10];
+            }
         }
 
         abstract public Point Play();

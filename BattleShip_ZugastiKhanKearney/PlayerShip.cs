@@ -13,11 +13,12 @@ namespace BattleShip_ZugastiKhanKearney
     {
         Canvas canvas;
         BattleShipUI bsu;
-        public UIElement ImageToShow { get; }
+        public Grid ImageToShow { get; }
+        public bool IsFinal { get; set; }
         double originalPositionX;
         double originalPositionY;
 
-        public PlayerShip(int size, PlayingBoard b, UIElement imageToShow, double originalPositionX, double originalPositionY, Canvas canvas, BattleShipUI bsu) : base(b, size)
+        public PlayerShip(int size, PlayingBoard b, Grid imageToShow, double originalPositionX, double originalPositionY, Canvas canvas, BattleShipUI bsu) : base(b, size)
         {
             this.ImageToShow = imageToShow;
             this.originalPositionX = originalPositionX;
@@ -68,72 +69,85 @@ namespace BattleShip_ZugastiKhanKearney
             }
 
             return new Point(row, col);
-        }
+        } 
 
         public void Drop(object sender, MouseButtonEventArgs e)
         {
-            Mouse.Capture(null);
-            captured = false;
-            Point p = ((PlayingBoard)B).GetLocationOfClick();
-            if (!this.IsOnGird() || !((PlayingBoard)B).IsPositionValid(this, p))
+            if (!IsFinal)
             {
-                Canvas.SetLeft(ImageToShow, originalPositionX);
-                Canvas.SetTop(ImageToShow, originalPositionY);
-                if (((Grid)ImageToShow).ActualWidth > ((Grid)ImageToShow).ActualHeight)
+                Mouse.Capture(null);
+                captured = false;
+                Point p = ((PlayingBoard)B).GetLocationOfClick();
+                if (!this.IsOnGird() || !((PlayingBoard)B).IsPositionValid(this, p))
                 {
-                    flipGrid(this);
-                }
-            }
-            else
-            {
-                Grid GridToPosition = (Grid)ImageToShow;
-                GridToPosition.Height = (GridToPosition.RowDefinitions.Count == 0 ? 1 : GridToPosition.RowDefinitions.Count) * (B.G.ActualWidth / 10);
-                GridToPosition.Width = (GridToPosition.ColumnDefinitions.Count == 0 ? 1 : GridToPosition.ColumnDefinitions.Count) * (B.G.ActualWidth / 10);
-
-                double xDisplacement = PointOfGrab.X;
-                double yDisplacement = PointOfGrab.Y;
-
-                double x = bsu.MainGrid.ColumnDefinitions[0].ActualWidth + (B.G.ActualWidth / 10) * ((p.Y));
-                double y = bsu.MainGrid.RowDefinitions[0].ActualHeight + (B.G.ActualHeight / 10) * ((p.X));
-                Canvas.SetLeft(ImageToShow, x);
-                Canvas.SetTop(ImageToShow, y);
-
-                if (IsHorizontal)
-                {
-                    for (int i = (p.Y > 0 ? -1 : 0); i < Size + (p.Y <= 9 - Size ? 1 : 0); i++)
+                    if (wasOnGridBefore && !this.IsOnGird())
                     {
-                        for(int j = (p.X > 0 ? -1 : 0); j < (p.X <= 8 ? 2 : 1); j++)
-                        {
-                            B.IsOccupied[(int)p.X + j][(int)p.Y + i]++;
-                        }
+                        bsu.TotalShipsPlaced--;
+                        bsu.FinalizePositionBtn.IsEnabled = false;
+                    }
+
+                    Canvas.SetLeft(ImageToShow, originalPositionX);
+                    Canvas.SetTop(ImageToShow, originalPositionY);
+                    if (((Grid)ImageToShow).ActualWidth > ((Grid)ImageToShow).ActualHeight)
+                    {
+                        flipGrid();
                     }
                 }
                 else
                 {
-                    for (int i = (p.X > 0 ? -1 : 0); i < Size + (p.X <= 9 - Size ? 1 : 0); i++)
+                    Grid GridToPosition = (Grid)ImageToShow;
+                    GridToPosition.Height = (GridToPosition.RowDefinitions.Count == 0 ? 1 : GridToPosition.RowDefinitions.Count) * (B.G.ActualWidth / 10);
+                    GridToPosition.Width = (GridToPosition.ColumnDefinitions.Count == 0 ? 1 : GridToPosition.ColumnDefinitions.Count) * (B.G.ActualWidth / 10);
+
+                    double xDisplacement = PointOfGrab.X;
+                    double yDisplacement = PointOfGrab.Y;
+
+                    double x = bsu.MainGrid.ColumnDefinitions[0].ActualWidth + (B.G.ActualWidth / 10) * ((p.Y));
+                    double y = bsu.MainGrid.RowDefinitions[0].ActualHeight + (B.G.ActualHeight / 10) * ((p.X));
+                    Canvas.SetLeft(ImageToShow, x);
+                    Canvas.SetTop(ImageToShow, y);
+
+                    if (IsHorizontal)
                     {
-                        for(int j = (p.Y > 0 ? -1 : 0); j < (p.Y <= 8 ? 2 : 1); j++)
+                        for (int i = (p.Y > 0 ? -1 : 0); i < Size + (p.Y <= 9 - Size ? 1 : 0); i++)
                         {
-                            B.IsOccupied[(int)p.X + i][(int)p.Y + j]++;
+                            for (int j = (p.X > 0 ? -1 : 0); j < (p.X <= 8 ? 2 : 1); j++)
+                            {
+                                B.IsOccupied[(int)p.X + j][(int)p.Y + i]++;
+                            }
                         }
+
+                        for (int i = 0; i < Size; i++)
+                        {
+                            B.AllLocations[(int)p.X][(int)p.Y + i] = Location.WillHit;
+                        }
+                    }
+                    else
+                    {
+                        for (int i = (p.X > 0 ? -1 : 0); i < Size + (p.X <= 9 - Size ? 1 : 0); i++)
+                        {
+                            for (int j = (p.Y > 0 ? -1 : 0); j < (p.Y <= 8 ? 2 : 1); j++)
+                            {
+                                B.IsOccupied[(int)p.X + i][(int)p.Y + j]++;
+                            }
+                        }
+                        for (int i = 0; i < Size; i++)
+                        {
+                            B.AllLocations[(int)p.X + i][(int)p.Y] = Location.WillHit;
+                        }
+                    }
+                    bsu.TotalShipsPlaced++;
+                    if (bsu.TotalShipsPlaced == 5)
+                    {
+                        bsu.FinalizePositionBtn.IsEnabled = true;
                     }
                 }
             }
-            string s = "";
-            foreach(int[] b1 in B.IsOccupied)
-            {
-                foreach(int b2 in b1)
-                {
-                    s += (b2 + " ");
-                }
-                s += "\n";
-            }
-            MessageBox.Show(s);
         }
 
-        private void flipGrid(PlayerShip ship)
+        private void flipGrid()
         {
-            Grid GridToTurn = ((Grid)(ship.ImageToShow));
+            Grid GridToTurn = (Grid)(this.ImageToShow);
 
             RowDefinitionCollection rdc = GridToTurn.RowDefinitions;
             ColumnDefinitionCollection cdc = GridToTurn.ColumnDefinitions;
@@ -192,7 +206,7 @@ namespace BattleShip_ZugastiKhanKearney
 
         public void Turn(object sender, MouseButtonEventArgs e)
         {
-            flipGrid(this);
+            flipGrid();
         }
 
         public void Move(object sender, MouseEventArgs e)
@@ -210,39 +224,61 @@ namespace BattleShip_ZugastiKhanKearney
             }
         }
 
+        bool wasOnGridBefore = false;
+
         public void Grab(object sender, MouseButtonEventArgs e)
         {
-            PointOfGrab = GetLocationOfClick();
-            Mouse.Capture(ImageToShow);
-            captured = true;
-            x_shape = Canvas.GetLeft(ImageToShow);
-            x_canvas = e.GetPosition(canvas).X;
-            y_shape = Canvas.GetTop(ImageToShow);
-            y_canvas = e.GetPosition(canvas).Y;
-
-            Point PointOnBoard = ((PlayingBoard)B).GetLocationOfClick();
-
-            Point p = (Point)(PointOnBoard - PointOfGrab);
-
-            if (x_shape != originalPositionX && y_shape != originalPositionY)
+            if (!IsFinal)
             {
-                if (IsHorizontal)
+                if (this.IsOnGird())
                 {
-                    for (int i = (p.Y > 0 ? -1 : 0); i < Size + (p.Y <= 9 - Size ? 1 : 0); i++)
-                    {
-                        for (int j = (p.X > 0 ? -1 : 0); j < (p.X <= 8 ? 2 : 1); j++)
-                        {
-                            B.IsOccupied[(int)p.X + j][(int)p.Y + i]--;
-                        }
-                    }
+                    wasOnGridBefore = true;
                 }
                 else
                 {
-                    for (int i = (p.X > 0 ? -1 : 0); i < Size + (p.X <= 9 - Size ? 1 : 0); i++)
+                    wasOnGridBefore = false;
+                }
+                PointOfGrab = GetLocationOfClick();
+                Mouse.Capture(ImageToShow);
+                captured = true;
+                x_shape = Canvas.GetLeft(ImageToShow);
+                x_canvas = e.GetPosition(canvas).X;
+                y_shape = Canvas.GetTop(ImageToShow);
+                y_canvas = e.GetPosition(canvas).Y;
+
+                Point PointOnBoard = ((PlayingBoard)B).GetLocationOfClick();
+
+                Point p = (Point)(PointOnBoard - PointOfGrab);
+
+                if (x_shape != originalPositionX && y_shape != originalPositionY)
+                {
+                    if (IsHorizontal)
                     {
-                        for (int j = (p.Y > 0 ? -1 : 0); j < (p.Y <= 8 ? 2 : 1); j++)
+                        for (int i = (p.Y > 0 ? -1 : 0); i < Size + (p.Y <= 9 - Size ? 1 : 0); i++)
                         {
-                            B.IsOccupied[(int)p.X + i][(int)p.Y + j]--;
+                            for (int j = (p.X > 0 ? -1 : 0); j < (p.X <= 8 ? 2 : 1); j++)
+                            {
+                                B.IsOccupied[(int)p.X + j][(int)p.Y + i]--;
+                            }
+                        }
+
+                        for (int i = 0; i < Size; i++)
+                        {
+                            B.AllLocations[(int)p.X][(int)p.Y + i] = Location.WillMiss;
+                        }
+                    }
+                    else
+                    {
+                        for (int i = (p.X > 0 ? -1 : 0); i < Size + (p.X <= 9 - Size ? 1 : 0); i++)
+                        {
+                            for (int j = (p.Y > 0 ? -1 : 0); j < (p.Y <= 8 ? 2 : 1); j++)
+                            {
+                                B.IsOccupied[(int)p.X + i][(int)p.Y + j]--;
+                            }
+                        }
+                        for (int i = 0; i < Size; i++)
+                        {
+                            B.AllLocations[(int)p.X + i][(int)p.Y] = Location.WillMiss;
                         }
                     }
                 }

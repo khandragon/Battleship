@@ -10,24 +10,72 @@ using System.Windows.Media;
 
 namespace BattleShip_ZugastiKhanKearney
 {
-    abstract class Board
+    public abstract class Board
     {
         public Grid G { get; }
         public BattleShipUI Bsu { get; }
         public Point LastClickLocation { get; protected set; }
         public int[][] IsOccupied { get; set; }
-        
+        public Location[][] AllLocations { get; set; }
+        public Random RD { get; set; } = new Random();
+
 
         public Board(BattleShipUI bsu)
         {
             IsOccupied = new int[10][];
+            AllLocations = new Location[10][];
             for (int i = 0; i < IsOccupied.Length; i++)
             {
+                AllLocations[i] = new Location[10];
+                for(int j = 0; j < AllLocations[i].Length; j++)
+                {
+                    AllLocations[i][j] = Location.WillMiss;
+                }
                 IsOccupied[i] = new int[10];
             }
             G = new Grid();
             FillGrid();
             this.Bsu = bsu;
+        }
+        public Point GetLocationOfClick()
+        {
+            Point p = Mouse.GetPosition(G);
+
+            int row = 0;
+            int col = 0;
+            double totalHeight = 0.0;
+            double totalWidth = 0.0;
+
+            foreach (RowDefinition rd in G.RowDefinitions)
+            {
+                totalHeight += rd.ActualHeight;
+                if (totalHeight >= p.Y)
+                {
+                    break;
+                }
+                row++;
+            }
+
+            foreach (ColumnDefinition cd in G.ColumnDefinitions)
+            {
+                totalWidth += cd.ActualWidth;
+                if (totalWidth >= p.X)
+                {
+                    break;
+                }
+                col++;
+            }
+
+            return new Point(row, col);
+        }
+
+        public bool IsAHit(Point p)
+        {
+            if (AllLocations[(int)p.X][(int)p.Y] == Location.WillHit)
+            {
+                return true;
+            }
+            return false;
         }
 
         private void FillGrid()
@@ -56,7 +104,5 @@ namespace BattleShip_ZugastiKhanKearney
         abstract public void Load();
 
         abstract public void ClickLocation(object sender, EventArgs r);
-
-        abstract public bool IsAHit(Point p);
     }
 }

@@ -8,14 +8,13 @@ using System.Windows.Input;
 
 namespace BattleShip_ZugastiKhanKearney
 {
-    abstract class Ship
-    {
+    public abstract class Ship
+    { 
         public Board B { get; }
         public bool IsHorizontal { get; protected set; }
         public int Size { get; }
         public Ship(Board b, int size)
         {
-
             this.Size = size;
             this.B = b;
         }
