@@ -23,5 +23,12 @@ namespace BattleShip_ZugastiKhanKearney
         {
             InitializeComponent();
         }
+
+        private void StartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new BattleShipUI();
+            win.Show();
+            this.Close();
+        }
     }
 }

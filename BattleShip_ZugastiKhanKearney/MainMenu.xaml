@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BattleShip_ZugastiKhanKearney"
         mc:Ignorable="d"
-        Title="Window1" Height="300" Width="300">
+        Title="MainWindow" Height="726.5" Width="1410.08645533" ShowInTaskbar="False" ResizeMode="NoResize">
     <Grid>
-        
+        <Image HorizontalAlignment="Left" Height="794" Margin="-2,-97,-91,-0.2" VerticalAlignment="Top" Width="1497" Source="image/mainPic.jpg"/>
+        <Image HorizontalAlignment="Left" Height="333" Margin="339,460,0,-96.2" VerticalAlignment="Top" Width="922" Source="image/battleship_banner.png"/>
+        <Button Name="StartBtn" Content="Start" HorizontalAlignment="Left" Height="38" Margin="1119,631,0,0" VerticalAlignment="Top" Width="111" Click="StartBtn_Click"/>
+        <Button Content="Load" HorizontalAlignment="Left" Height="38" Margin="1261,630,0,0" VerticalAlignment="Top" Width="112"/>
+
     </Grid>
 </Window>

@@ -63,6 +63,9 @@
     <Compile Include="Player.cs" />
     <Compile Include="RadarBoard.cs" />
     <Compile Include="PlayerShip.cs" />
+    <Compile Include="MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
+    </Compile>
     <Page Include="BattleShipUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,6 +78,10 @@
       <DependentUpon>BattleShipUI.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
@@ -105,7 +112,28 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="metal.jpg" />
+    <Resource Include="image\metal.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\b1.png" />
+    <Resource Include="image\b2.png" />
+    <Resource Include="image\b3.png" />
+    <Resource Include="image\b4.png" />
+    <Resource Include="image\explosion.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\water.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="audio\30_second_countdown.wav" />
+    <Content Include="audio\alt_30_sec_count.wav" />
+    <Content Include="audio\background.wav" />
+    <Content Include="audio\boom.wav" />
+    <Content Include="audio\lose.wav" />
+    <Content Include="audio\splash.wav" />
+    <Content Include="audio\win.wav" />
+    <Resource Include="image\battleship_banner.png" />
+    <Resource Include="image\mainPic.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
