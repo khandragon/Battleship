@@ -104,7 +104,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="metal.jpg" />
+    <Resource Include="images\metal.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\b1.png" />
+    <Resource Include="images\b2.png" />
+    <Resource Include="images\b3.png" />
+    <Resource Include="images\b4.png" />
+    <Resource Include="images\b5.png" />
+    <Resource Include="images\battleship_banner.png" />
+    <Resource Include="images\watttaaa.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

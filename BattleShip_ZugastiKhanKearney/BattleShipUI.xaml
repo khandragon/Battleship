@@ -39,7 +39,6 @@
                 <Rectangle Grid.Row="1" Grid.Column="0" Margin="0,0,0,0" Fill="#B2000000"/>
                 <Rectangle Grid.Row="2" Grid.Column="0" Margin="0,0,0,0" Fill="#B2000000"/>
             </Grid>
-
             <Grid x:Name="ShipSize31" Canvas.Left="107" Canvas.Top="174" Height="151" Width="50" Panel.ZIndex="6">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50*"/>
