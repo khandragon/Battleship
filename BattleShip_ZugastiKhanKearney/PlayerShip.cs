@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace BattleShip_ZugastiKhanKearney
 {
@@ -154,6 +156,16 @@ namespace BattleShip_ZugastiKhanKearney
 
             if (!IsHorizontal)
             {
+                for (int i = 0; i < ImageToShow.Children.Count; i++)
+                {
+                    if (ImageToShow.Children[i] is Image)
+                    {
+                        ((Image)ImageToShow.Children[i]).Source = new BitmapImage(new Uri("image/b1h.png", UriKind.Relative));
+                        Grid.SetColumnSpan(((Image)ImageToShow.Children[i]), 3);
+                        Grid.SetRowSpan(((Image)ImageToShow.Children[i]), 1);
+
+                    }
+                }
                 double temp = GridToTurn.Width;
                 GridToTurn.Width = GridToTurn.Height;
                 GridToTurn.Height = temp;
@@ -178,6 +190,7 @@ namespace BattleShip_ZugastiKhanKearney
             }
             else
             {
+               
                 double temp = GridToTurn.Height;
                 GridToTurn.Height = GridToTurn.Width;
                 GridToTurn.Width = temp;
@@ -254,6 +267,7 @@ namespace BattleShip_ZugastiKhanKearney
                 {
                     if (IsHorizontal)
                     {
+                        
                         for (int i = (p.Y > 0 ? -1 : 0); i < Size + (p.Y <= 9 - Size ? 1 : 0); i++)
                         {
                             for (int j = (p.X > 0 ? -1 : 0); j < (p.X <= 8 ? 2 : 1); j++)

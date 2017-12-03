@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BattleShip_ZugastiKhanKearney"
         mc:Ignorable="d"
         Title="Battleship" Height="726.5" Width="1410.08645533" ShowInTaskbar="False" ResizeMode="NoResize">
-
+    
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="120*"/>
@@ -22,8 +22,8 @@
             <ColumnDefinition Width="495*"/>
             <ColumnDefinition Width="199*"/>
         </Grid.ColumnDefinitions>
-        <!--<Image Source="image/metal.jpg" Stretch="UniformToFill" Grid.ColumnSpan="5" Grid.RowSpan="5" Margin="0,0,0.431,0"/>-->
-
+        
+        <Image Source="image/metal.jpg" Stretch="UniformToFill" Grid.ColumnSpan="5" Grid.RowSpan="5" Margin="0,0,0.431,0"/>
         <Rectangle Fill="#FFF4F4F5" Stroke="Black" Margin="10,10.128,9.569,10.622" Grid.Row="1" Grid.RowSpan="4"/>
         <Rectangle Fill="#FFF4F4F5" Stroke="Black" Margin="10,10,10,9" Grid.ColumnSpan="5"/>
         <Button x:Name="FinalizePositionBtn" Margin="10,10,10,10" Grid.Row="1" Grid.Column="4" Content="Finalize Positions" Click="FinalizePositionBtn_Click" IsEnabled="False"/>
@@ -40,7 +40,7 @@
                 <Rectangle Grid.Row="0" Grid.Column="0" Margin="0,0,0.211,0" Fill="#B2000000"/>
                 <Rectangle Grid.Row="1" Grid.Column="0" Margin="0,0,0,0" Fill="#B2000000"/>
                 <Rectangle Grid.Row="2" Grid.Column="0" Margin="0,0,0,0" Fill="#B2000000"/>
-                <Image Source="image/b1.png" Margin="0,0,-0.4,-92.6"/>
+                <Image x:Name="threehitboat" Source="image/b1v.png" Margin="0,0,1,0.2" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Grid.RowSpan="3"/>
             </Grid>
 
             <Grid x:Name="ShipSize31" Canvas.Left="107" Canvas.Top="174" Height="151" Width="50" Panel.ZIndex="6">
@@ -52,7 +52,7 @@
                 <Rectangle Grid.Row="0" Grid.Column="0" Margin="0,0,0.211,0" Fill="#B2000000"/>
                 <Rectangle Grid.Row="1" Grid.Column="0" Margin="0,0,0,0" Fill="#B2000000"/>
                 <Rectangle Grid.Row="2" Grid.Column="0" Margin="0,0,0,0" Fill="#B2000000"/>
-                <Image Source="image/b1.png" Margin="0,0,-0.4,-92.6"/>
+                <Image x:Name="threehitboat1" Source="image/b1v.png" Margin="0,0,-0.4,-92.6"/>
             </Grid>
 
             <Grid x:Name="ShipSize4" Canvas.Left="37" Canvas.Top="346" Height="201" Width="50" Panel.ZIndex="6">
@@ -66,7 +66,7 @@
                 <Rectangle Grid.Row="1" Grid.Column="0" Margin="0,0,0,0" Fill="#B2000000"/>
                 <Rectangle Grid.Row="2" Grid.Column="0" Margin="0,0,0,0" Fill="#B2000000"/>
                 <Rectangle Grid.Row="4" Grid.Column="0" Margin="0,0,0,0" Fill="#B2000000"/>
-                <Image Source="image/b2.png" Margin="-6,-29,-4,-25.2" Grid.RowSpan="4"/>
+                <Image x:Name="fourhitboat" Source="image/b2v.png" Margin="-6,-29,-4,-25.2" Grid.RowSpan="4"/>
             </Grid>
 
             <Grid x:Name="ShipSize5" Canvas.Left="107" Canvas.Top="346" Height="252" Width="50" Panel.ZIndex="6">
@@ -82,7 +82,7 @@
                 <Rectangle Grid.Row="2" Grid.Column="0" Margin="0,0,0,0" Fill="#B2000000"/>
                 <Rectangle Grid.Row="3" Grid.Column="0" Margin="0,0,0,0" Fill="#B2000000"/>
                 <Rectangle Grid.Row="4" Grid.Column="0" Margin="0,0,0,0" Fill="#B2000000"/>
-                <Image Source="image/b3.png" Margin="0,-13,0,0" Grid.RowSpan="5"/>
+                <Image x:Name="fivehitboat" Source="image/b3v.png" Margin="0,-13,0,0" Grid.RowSpan="5"/>
             </Grid>
 
             <Grid x:Name="ShipSize2" Canvas.Left="37" Canvas.Top="568" Height="101" Width="50" Panel.ZIndex="6">
@@ -92,11 +92,10 @@
                 </Grid.RowDefinitions>
                 <Rectangle Grid.Row="0" Grid.Column="0" Margin="0,0,0.211,0" Fill="#B2000000"/>
                 <Rectangle Grid.Row="1" Grid.Column="0" Margin="0,0,0,0" Fill="#B2000000"/>
-                <Image Source="image/b4.png" Margin="0,4,0,-0.2" Grid.RowSpan="2"/>
+                <Image x:Name="twohitboat" Source="image/b4v.png" Margin="0,4,0,-0.2" Grid.RowSpan="2"/>
             </Grid>
         </Canvas>
         <Image HorizontalAlignment="Left" Height="588" Margin="135,-118,0,0" VerticalAlignment="Top" Width="1126" Source="image/battleship_banner.png" Grid.RowSpan="4" Grid.ColumnSpan="5"/>
-        <MediaElement Grid.Column="1" HorizontalAlignment="Left" Height="631" Margin="314,66,0,-0.2" Grid.RowSpan="5" VerticalAlignment="Top" Width="880" Source="image/water.gif" Grid.ColumnSpan="4"/>
     </Grid>
 
 

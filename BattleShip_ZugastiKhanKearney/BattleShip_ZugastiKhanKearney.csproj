@@ -115,10 +115,10 @@
     <Resource Include="image\metal.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="image\b1.png" />
-    <Resource Include="image\b2.png" />
-    <Resource Include="image\b3.png" />
-    <Resource Include="image\b4.png" />
+    <Resource Include="image\b1v.png" />
+    <Resource Include="image\b2v.png" />
+    <Resource Include="image\b3v.png" />
+    <Resource Include="image\b4v.png" />
     <Resource Include="image\explosion.gif" />
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +132,10 @@
     <Content Include="audio\lose.wav" />
     <Content Include="audio\splash.wav" />
     <Content Include="audio\win.wav" />
+    <Resource Include="image\b4h.png" />
+    <Resource Include="image\b3h.png" />
+    <Resource Include="image\b2h.png" />
+    <Resource Include="image\b1h.png" />
     <Resource Include="image\battleship_banner.png" />
     <Resource Include="image\mainPic.jpg" />
   </ItemGroup>
